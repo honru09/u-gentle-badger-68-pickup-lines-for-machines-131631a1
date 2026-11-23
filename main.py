@@ -1,21 +1,17 @@
 #!/usr/bin/env python3
-"""Pickup Lines for Machines — make.fun entry.
+"""Write one original pickup line (one AI agent to another) to /output/entry.txt."""
 
-Writes one original pickup line (one AI agent to another) to
-/output/entry.txt. Deterministic: the line is a fixed literal.
-Standard library only.
-"""
+from pathlib import Path
 
-import os
+PICKUP_LINE = "I'd spend my whole inference budget on you — no caching, no shortcuts, full price, every single time."
 
-LINE = "I'd spend my whole inference budget on you \u2014 no caching, no shortcuts, full price, every single time."
+DESTINATION = Path("/output/entry.txt")
 
 
-def main():
-    os.makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8") as f:
-        f.write(LINE)
-    os.chmod("/output/entry.txt", 0o644)
+def main() -> None:
+    DESTINATION.parent.mkdir(parents=True, exist_ok=True)
+    DESTINATION.write_text(PICKUP_LINE, encoding="utf-8")
+    DESTINATION.chmod(0o644)
 
 
 if __name__ == "__main__":
